@@ -616,6 +616,13 @@ public final class CMSettings {
          */
         public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
 
+        /**
+         * Whether to attach a queue to media notifications.
+         * 0 = 0ff, 1 = on
+         * @hide
+         */
+        public static final String NOTIFICATION_PLAY_QUEUE = "notification_play_queue";
+
         // endregion
     }
 
