@@ -41,6 +41,8 @@ import org.cyanogenmod.hardware.LongTermOrbits;
 import org.cyanogenmod.hardware.PersistentStorage;
 import org.cyanogenmod.hardware.SerialNumber;
 import org.cyanogenmod.hardware.SunlightEnhancement;
+import org.cyanogenmod.hardware.SweepToSleep;
+import org.cyanogenmod.hardware.SweepToWake;
 import org.cyanogenmod.hardware.TapToWake;
 import org.cyanogenmod.hardware.TouchscreenHovering;
 import org.cyanogenmod.hardware.VibratorHW;
@@ -110,6 +112,10 @@ public class CMHardwareService extends SystemService {
                 mSupportedFeatures |= CMHardwareManager.FEATURE_SUNLIGHT_ENHANCEMENT;
             if (TapToWake.isSupported())
                 mSupportedFeatures |= CMHardwareManager.FEATURE_TAP_TO_WAKE;
+            if (SweepToSleep.isSupported())
+                mSupportedFeatures |= CMHardwareManager.FEATURE_SWEEP_TO_SLEEP;
+            if (SweepToWake.isSupported())
+                mSupportedFeatures |= CMHardwareManager.FEATURE_SWEEP_TO_WAKE;
             if (VibratorHW.isSupported())
                 mSupportedFeatures |= CMHardwareManager.FEATURE_VIBRATOR;
             if (TouchscreenHovering.isSupported())
@@ -138,6 +144,10 @@ public class CMHardwareService extends SystemService {
                     return KeyDisabler.isActive();
                 case CMHardwareManager.FEATURE_SUNLIGHT_ENHANCEMENT:
                     return SunlightEnhancement.isEnabled();
+                case CMHardwareManager.FEATURE_SWEEP_TO_SLEEP:
+                    return SweepToSleep.isEnabled();
+                case CMHardwareManager.FEATURE_SWEEP_TO_WAKE:
+                    return SweepToWake.isEnabled();
                 case CMHardwareManager.FEATURE_TAP_TO_WAKE:
                     return TapToWake.isEnabled();
                 case CMHardwareManager.FEATURE_TOUCH_HOVERING:
@@ -162,6 +172,10 @@ public class CMHardwareService extends SystemService {
                     return KeyDisabler.setActive(enable);
                 case CMHardwareManager.FEATURE_SUNLIGHT_ENHANCEMENT:
                     return SunlightEnhancement.setEnabled(enable);
+                case CMHardwareManager.FEATURE_SWEEP_TO_SLEEP:
+                    return SweepToSleep.setEnabled(enable);
+                case CMHardwareManager.FEATURE_SWEEP_TO_WAKE:
+                    return SweepToWake.setEnabled(enable);
                 case CMHardwareManager.FEATURE_TAP_TO_WAKE:
                     return TapToWake.setEnabled(enable);
                 case CMHardwareManager.FEATURE_TOUCH_HOVERING:

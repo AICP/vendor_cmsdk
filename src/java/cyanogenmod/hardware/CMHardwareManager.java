@@ -119,12 +119,24 @@ public final class CMHardwareManager {
      */
     public static final int FEATURE_PERSISTENT_STORAGE = 0x4000;
 
+    /**
+     * Sweep buttom part of the touch panel to wake up the device
+     */
+    public static final int FEATURE_SWEEP_TO_WAKE = 0x10000;
+
+    /**
+     * Sweep buttom part of the touch panel to sleep the device
+     */
+    public static final int FEATURE_SWEEP_TO_SLEEP = 0x20000;
+
     private static final List<Integer> BOOLEAN_FEATURES = Arrays.asList(
         FEATURE_ADAPTIVE_BACKLIGHT,
         FEATURE_COLOR_ENHANCEMENT,
         FEATURE_HIGH_TOUCH_SENSITIVITY,
         FEATURE_KEY_DISABLE,
         FEATURE_SUNLIGHT_ENHANCEMENT,
+        FEATURE_SWEEP_TO_SLEEP,
+        FEATURE_SWEEP_TO_WAKE,
         FEATURE_TAP_TO_WAKE,
         FEATURE_TOUCH_HOVERING,
         FEATURE_AUTO_CONTRAST
