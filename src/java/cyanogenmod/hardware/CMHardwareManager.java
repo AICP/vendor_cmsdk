@@ -129,6 +129,11 @@ public final class CMHardwareManager {
      */
     public static final int FEATURE_SWEEP_TO_SLEEP = 0x20000;
 
+    /**
+     * Thermal change monitor
+     */
+    public static final int FEATURE_THERMAL_MONITOR = 0x8000;
+
     private static final List<Integer> BOOLEAN_FEATURES = Arrays.asList(
         FEATURE_ADAPTIVE_BACKLIGHT,
         FEATURE_COLOR_ENHANCEMENT,
@@ -139,7 +144,8 @@ public final class CMHardwareManager {
         FEATURE_SWEEP_TO_WAKE,
         FEATURE_TAP_TO_WAKE,
         FEATURE_TOUCH_HOVERING,
-        FEATURE_AUTO_CONTRAST
+        FEATURE_AUTO_CONTRAST,
+        FEATURE_THERMAL_MONITOR
     );
 
     private static CMHardwareManager sCMHardwareManagerInstance;
@@ -780,5 +786,46 @@ public final class CMHardwareManager {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return current thermal {@link cyanogenmod.hardware.ThermalListenerCallback.State}
+     */
+    public int getThermalState() {
+        try {
+            if (checkService()) {
+                return sService.getThermalState();
+            }
+        } catch (RemoteException e) {
+        }
+        return ThermalListenerCallback.State.STATE_UNKNOWN;
+    }
+
+   /**
+    * Register a callback to be notified of thermal state changes
+    * @return boolean indicating whether register succeeded or failed
+    */
+    public boolean registerThermalListener(ThermalListenerCallback thermalCallback) {
+        try {
+            if (checkService()) {
+                return sService.registerThermalListener(thermalCallback);
+            }
+        } catch (RemoteException e) {
+        }
+        return false;
+    }
+
+   /**
+    * Unregister a callback previously registered to be notified of thermal state changes
+    * @return boolean indicating whether un-registering succeeded or failed
+    */
+    public boolean unRegisterThermalListener(ThermalListenerCallback thermalCallback) {
+        try {
+            if (checkService()) {
+                return sService.unRegisterThermalListener(thermalCallback);
+            }
+        } catch (RemoteException e) {
+        }
+        return false;
     }
 }
