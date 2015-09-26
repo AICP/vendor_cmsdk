@@ -586,7 +586,35 @@ public final class CMSettings {
          * 0 = off, 1 = right, 2 = left
          * @hide
          */
-        public static final String QS_QUICK_PULLDOWN = "qs_quick_pulldown";
+        public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
+
+        /**
+         * The time in ms to keep the button backlight on after pressing a button.
+         * A value of 0 will keep the buttons on for as long as the screen is on.
+         * @hide
+         */
+        public static final String BUTTON_BACKLIGHT_TIMEOUT = "button_backlight_timeout";
+
+        /**
+         * The button brightness to be used while the screen is on or after a button press,
+         * depending on the value of {@link BUTTON_BACKLIGHT_TIMEOUT}.
+         * Valid value range is between 0 and {@link PowerManager#getMaximumButtonBrightness()}
+         * @hide
+         */
+        public static final String BUTTON_BRIGHTNESS = "button_brightness";
+
+        /**
+         * The keyboard brightness to be used while the screen is on.
+         * Valid value range is between 0 and {@link PowerManager#getMaximumKeyboardBrightness()}
+         * @hide
+         */
+        public static final String KEYBOARD_BRIGHTNESS = "keyboard_brightness";
+
+        /**
+         * Wether navigation bar is enabled or not
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
 
         // endregion
     }
@@ -925,21 +953,6 @@ public final class CMSettings {
         public static final String ADVANCED_MODE = "advanced_mode";
 
         /**
-         * The time in ms to keep the button backlight on after pressing a button.
-         * A value of 0 will keep the buttons on for as long as the screen is on.
-         * @hide
-         */
-        public static final String BUTTON_BACKLIGHT_TIMEOUT = "button_backlight_timeout";
-
-        /**
-         * The button brightness to be used while the screen is on or after a button press,
-         * depending on the value of {@link BUTTON_BACKLIGHT_TIMEOUT}.
-         * Valid value range is between 0 and {@link PowerManager#getMaximumButtonBrightness()}
-         * @hide
-         */
-        public static final String BUTTON_BRIGHTNESS = "button_brightness";
-
-        /**
          * A '|' delimited list of theme components to apply from the default theme on first boot.
          * Components can be one or more of the "mods_XXXXXXX" found in
          * {@link ThemesContract$ThemesColumns}.  Leaving this field blank assumes all components
@@ -958,19 +971,6 @@ public final class CMSettings {
         public static final String DEFAULT_THEME_PACKAGE = "default_theme_package";
 
         /**
-         * Developer options - Navigation Bar show switch
-         * @hide
-         */
-        public static final String DEV_FORCE_SHOW_NAVBAR = "dev_force_show_navbar";
-
-        /**
-         * The keyboard brightness to be used while the screen is on.
-         * Valid value range is between 0 and {@link PowerManager#getMaximumKeyboardBrightness()}
-         * @hide
-         */
-        public static final String KEYBOARD_BRIGHTNESS = "keyboard_brightness";
-
-        /**
          * Default theme config name
          */
         public static final String NAME_THEME_CONFIG = "name_theme_config";
@@ -984,12 +984,6 @@ public final class CMSettings {
                 "navigation_ring_targets_1",
                 "navigation_ring_targets_2",
         };
-
-        /**
-         * String to contain power menu actions
-         * @hide
-         */
-        public static final String POWER_MENU_ACTIONS = "power_menu_actions";
 
         /**
          * Whether to show the brightness slider in quick settings panel.
@@ -1022,6 +1016,12 @@ public final class CMSettings {
          * @hide
          */
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
+
+        /**
+         * String to contain power menu actions
+         * @hide
+         */
+        public static final String POWER_MENU_ACTIONS = "power_menu_actions";
 
         // endregion
     }

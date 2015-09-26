@@ -17,12 +17,6 @@
 <resources>
     <!-- Defaults for System -->
 
-    <!-- Default for CMSettings.System.QS_QUICK_PULLDOWN
-         0. Off
-         1. Right
-         2. Left -->
-    <integer name="def_qs_quick_pulldown">0</integer>
-
     <!-- Defaults for Secure -->
 
     <!-- Default for CMSettings.Secure.ADVANCED_MODE -->
@@ -33,9 +27,6 @@
 
     <!-- Default for CMSettings.Secure.DEFAULT_THEME_PACKAGE -->
     <string name="def_theme_package"></string>
-
-    <!-- Defaults for CMSettings.Secure.DEV_FORCE_SHOW_NAVBAR -->
-    <integer name="def_force_show_navbar">0</integer>
 
     <!-- Default for CMSettings.Secure.QS_TILES
          Comma-delimited, quick settings tiles. See QSConstants.java for a list of all available tiles -->

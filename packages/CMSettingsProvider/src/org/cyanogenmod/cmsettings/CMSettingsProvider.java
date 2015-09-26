@@ -167,8 +167,16 @@ public class CMSettingsProvider extends ContentProvider {
 
             // Migrate system settings
             HashMap<String, String> systemToCmSettingsMap = new HashMap<String, String>();
-            systemToCmSettingsMap.put(Settings.System.QS_QUICK_PULLDOWN,
-                    CMSettings.System.QS_QUICK_PULLDOWN);
+            systemToCmSettingsMap.put(Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN,
+                    CMSettings.System.STATUS_BAR_QUICK_QS_PULLDOWN);
+            systemToCmSettingsMap.put(Settings.System.BUTTON_BACKLIGHT_TIMEOUT,
+                    CMSettings.System.BUTTON_BACKLIGHT_TIMEOUT);
+            systemToCmSettingsMap.put(Settings.System.BUTTON_BRIGHTNESS,
+                    CMSettings.System.BUTTON_BRIGHTNESS);
+            systemToCmSettingsMap.put(Settings.System.NAVIGATION_BAR_SHOW,
+                    CMSettings.System.NAVIGATION_BAR_SHOW);
+            systemToCmSettingsMap.put(Settings.System.KEYBOARD_BRIGHTNESS,
+                    CMSettings.System.KEYBOARD_BRIGHTNESS);
 
             int rowsMigrated = migrateCMSettingsForTable(userId,
                     CMDatabaseHelper.CMTableNames.TABLE_SYSTEM, systemToCmSettingsMap);
@@ -178,21 +186,13 @@ public class CMSettingsProvider extends ContentProvider {
             HashMap<String, String> secureToCmSettingsMap = new HashMap<String, String>();
             secureToCmSettingsMap.put(Settings.Secure.ADVANCED_MODE,
                     CMSettings.Secure.ADVANCED_MODE);
-            secureToCmSettingsMap.put(Settings.Secure.BUTTON_BACKLIGHT_TIMEOUT,
-                    CMSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT);
-            secureToCmSettingsMap.put(Settings.Secure.BUTTON_BRIGHTNESS,
-                    CMSettings.Secure.BUTTON_BRIGHTNESS);
             secureToCmSettingsMap.put(Settings.Secure.DEFAULT_THEME_COMPONENTS,
                     CMSettings.Secure.DEFAULT_THEME_COMPONENTS);
             secureToCmSettingsMap.put(Settings.Secure.DEFAULT_THEME_PACKAGE,
                     CMSettings.Secure.DEFAULT_THEME_PACKAGE);
-            secureToCmSettingsMap.put(Settings.Secure.DEV_FORCE_SHOW_NAVBAR,
-                    CMSettings.Secure.DEV_FORCE_SHOW_NAVBAR);
             secureToCmSettingsMap.put(
                     Configuration.THEME_PKG_CONFIGURATION_PERSISTENCE_PROPERTY,
                             CMSettings.Secure.NAME_THEME_CONFIG);
-            secureToCmSettingsMap.put(Settings.Secure.KEYBOARD_BRIGHTNESS,
-                    CMSettings.Secure.KEYBOARD_BRIGHTNESS);
             secureToCmSettingsMap.put(Settings.Secure.POWER_MENU_ACTIONS,
                     CMSettings.Secure.POWER_MENU_ACTIONS);
             secureToCmSettingsMap.put(Settings.Secure.STATS_COLLECTION,

@@ -188,8 +188,6 @@ public class CMDatabaseHelper extends SQLiteOpenHelper{
      */
     private void loadSettings(SQLiteDatabase db) {
         // System
-        loadIntegerSetting(db, CMTableNames.TABLE_SYSTEM, CMSettings.System.QS_QUICK_PULLDOWN,
-                R.integer.def_qs_quick_pulldown);
 
         // Secure
         loadBooleanSetting(db, CMTableNames.TABLE_SECURE, CMSettings.Secure.ADVANCED_MODE,
@@ -200,9 +198,6 @@ public class CMDatabaseHelper extends SQLiteOpenHelper{
 
         loadStringSetting(db, CMTableNames.TABLE_SECURE, CMSettings.Secure.DEFAULT_THEME_PACKAGE,
                 R.string.def_theme_package);
-
-        loadIntegerSetting(db, CMTableNames.TABLE_SECURE, CMSettings.Secure.DEV_FORCE_SHOW_NAVBAR,
-                R.integer.def_force_show_navbar);
 
         loadStringSetting(db, CMTableNames.TABLE_SECURE, CMSettings.Secure.QS_TILES,
                 R.string.def_qs_tiles);
