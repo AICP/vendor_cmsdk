@@ -66,5 +66,6 @@ public class CMMetricsLogger extends MetricsLogger {
     public static final int TILE_HEADS_UP = BASE + 39;
     public static final int TILE_BATTERY_SAVER = BASE + 40;
     public static final int TILE_THEMES = BASE + 41;
+    public static final int TILE_CAFFEINE = BASE + 42;
     public static final int AICPEXTRAS = BASE + 100;
 }
