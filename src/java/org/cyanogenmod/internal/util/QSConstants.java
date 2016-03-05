@@ -64,7 +64,6 @@ public class QSConstants {
     public static final String TILE_NAVBAR = "navbar";
     public static final String TILE_PIE = "pie";
     public static final String TILE_APPCIRCLEBAR = "appcirclebar";
-    public static final String TILE_THEMES = "themes";
     public static final String TILE_APP_PICKER = "app_picker";
     public static final String TILE_SOUND = "sound";
 
@@ -121,7 +120,6 @@ public class QSConstants {
         STATIC_TILES_AVAILABLE.add(TILE_PIE);
         STATIC_TILES_AVAILABLE.add(TILE_APPCIRCLEBAR);
         STATIC_TILES_AVAILABLE.add(TILE_BATTERY_SAVER);
-        STATIC_TILES_AVAILABLE.add(TILE_THEMES);
         STATIC_TILES_AVAILABLE.add(TILE_APP_PICKER);
         STATIC_TILES_AVAILABLE.add(TILE_CAFFEINE);
         STATIC_TILES_AVAILABLE.add(TILE_SOUND);
