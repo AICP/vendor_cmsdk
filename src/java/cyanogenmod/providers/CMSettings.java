@@ -1769,16 +1769,6 @@ public final class CMSettings {
                 sBooleanValidator;
 
         /**
-         * Whether or not to respect the network presentation indicator of outgoing calls
-         */
-        public static final String CONNECTED_LINE_IDENTIFICATION =
-                "connected_line_identification";
-
-        /** @hide */
-        public static final Validator CONNECTED_LINE_IDENTIFICATION_VALIDATOR =
-                sBooleanValidator;
-
-        /**
          * I can haz more bukkits
          * @hide
          */
@@ -2031,8 +2021,6 @@ public final class CMSettings {
                     NOTIFICATION_LIGHT_COLOR_AUTO_VALIDATOR);
             VALIDATORS.put(TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK,
                     TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK_VALIDATOR);
-            VALIDATORS.put(CONNECTED_LINE_IDENTIFICATION,
-                    CONNECTED_LINE_IDENTIFICATION_VALIDATOR);
             VALIDATORS.put(__MAGICAL_TEST_PASSING_ENABLER,
                     __MAGICAL_TEST_PASSING_ENABLER_VALIDATOR);
         };
