@@ -51,7 +51,7 @@ public class CMMetricsLogger extends MetricsLogger {
     public static final int TILE_CUSTOM_QS = BASE + 24;
     public static final int TILE_CUSTOM_QS_DETAIL = BASE + 25;
     public static final int TILE_EDIT = BASE + 26;
-    public static final int DYNAMIC_LIVE_DISPLAY = BASE + 27;
+    public static final int TILE_LIVE_DISPLAY = BASE + 27;
     public static final int TILE_LOCKSCREEN_TOGGLE = BASE + 28;
     public static final int TILE_NFC = BASE + 29;
     public static final int TILE_PERF_PROFILE = BASE + 30;
