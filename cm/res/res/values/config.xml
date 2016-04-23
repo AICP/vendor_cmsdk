@@ -97,5 +97,6 @@
         <item>org.cyanogenmod.platform.internal.IconCacheManagerService</item>
         <item>org.cyanogenmod.platform.internal.LiveLockScreenServiceBroker</item>
         <item>org.cyanogenmod.platform.internal.display.LiveDisplayService</item>
+        <item>org.cyanogenmod.platform.internal.CMAudioService</item>
     </string-array>
 </resources>
