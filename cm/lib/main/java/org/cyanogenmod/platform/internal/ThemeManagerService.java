@@ -97,6 +97,10 @@ public class ThemeManagerService extends SystemService {
     private static final String CM_SETUPWIZARD_PACKAGE = "com.cyanogenmod.setupwizard";
     private static final String MANAGED_PROVISIONING_PACKAGE = "com.android.managedprovisioning";
 
+    private static final String[] LAUNCHER_KILL_BLACKLIST = new String[] {
+            "com.android.launcher3"
+    };
+
     // Defines a min and max compatible api level for themes on this system.
     private static final int MIN_COMPATIBLE_VERSION = 21;
 
@@ -877,12 +881,25 @@ public class ThemeManagerService extends SystemService {
                     !isSetupActivity(info) && !handlesThemeChanges(
                     info.activityInfo.applicationInfo.packageName, themeChangeInfos)) {
                 String pkgToStop = info.activityInfo.applicationInfo.packageName;
-                Log.d(TAG, "Force stopping " +  pkgToStop + " for theme change");
-                try {
-                    am.forceStopPackage(pkgToStop);
-                } catch(Exception e) {
-                    Log.e(TAG, "Unable to force stop package, did you forget platform signature?",
-                            e);
+                boolean doKillLauncher = true;
+                for (int i = 0; i < LAUNCHER_KILL_BLACKLIST.length; i++) {
+                    if (TextUtils.equals(pkgToStop, LAUNCHER_KILL_BLACKLIST[i])) {
+                        doKillLauncher = false;
+                        break;
+                    }
+                }
+                if (doKillLauncher) {
+                    Log.d(TAG, "Force stopping " + pkgToStop + " for theme change");
+                    try {
+                        am.forceStopPackage(pkgToStop);
+                    } catch (Exception e) {
+                        Log.e(TAG,
+                                "Unable to force stop package, did you forget platform signature?",
+                                e);
+                    }
+                } else {
+                    Log.d(TAG, "Not force stopping blacklisted launcher " + pkgToStop
+                            + " for theme change");
                 }
             }
         }
