@@ -81,9 +81,6 @@ public class CMSettingsProviderDefaultsTest extends AndroidTestCase {
     //SECURE
     static {
         SECURE_SETTINGS_DEFAULTS.add(new Setting(
-                CMSettings.Secure.DEV_FORCE_SHOW_NAVBAR,
-                "R.integer.def_force_show_navbar"));
-        SECURE_SETTINGS_DEFAULTS.add(new Setting(
                 CMSettings.Secure.ADVANCED_MODE,
                 "R.bool.def_advanced_mode"));
         SECURE_SETTINGS_DEFAULTS.add(new Setting(
@@ -117,6 +114,9 @@ public class CMSettingsProviderDefaultsTest extends AndroidTestCase {
         GLOBAL_SETTINGS_DEFAULTS.add(new Setting(
                 CMSettings.Global.POWER_NOTIFICATIONS_RINGTONE,
                 "R.string.def_power_notifications_ringtone"));
+        GLOBAL_SETTINGS_DEFAULTS.add(new Setting(
+                CMSettings.Global.DEV_FORCE_SHOW_NAVBAR,
+                "R.integer.def_force_show_navbar"));
     }
 
     @Override
