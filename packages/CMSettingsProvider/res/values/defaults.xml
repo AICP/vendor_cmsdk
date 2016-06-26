@@ -107,4 +107,10 @@
     <!-- Default values for protected component managers -->
     <string name="def_protected_component_managers" translatable="false">com.android.settings|com.android.launcher3|com.cyanogenmod.trebuchet</string>
 
+    <!-- Default enabled event based LLS components
+         Contains a list of component names for enabled components, separated by '|'
+         ex. com.example.mylls/com.example.mylls.LiveLockScreen|com.example.anotherLls/com.example.anotherLls.MyLls
+    -->
+    <string name="def_enabled_event_lls_components"></string>
+
 </resources>
