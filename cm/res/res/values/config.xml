@@ -111,7 +111,7 @@
         <item>org.cyanogenmod.platform.internal.IconCacheManagerService</item>
         <item>org.cyanogenmod.platform.internal.LiveLockScreenServiceBroker</item>
         <item>org.cyanogenmod.platform.internal.display.LiveDisplayService</item>
-        <item>org.cyanogenmod.platform.internal.CMAudioService</item>
+        <item>org.cyanogenmod.platform.internal.CMAudioServiceBroker</item>
     </string-array>
 
     <!-- The CMSystemServer class that is invoked from Android's SystemServer -->
