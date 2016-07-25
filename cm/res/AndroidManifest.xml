@@ -207,7 +207,8 @@
     <permission android:name="cyanogenmod.permission.MANAGE_AUDIO_SESSIONS"
                 android:label="@string/permlab_manage_audio_sessions"
                 android:description="@string/permdesc_manage_audio_sessions"
-                android:protectionLevel="signature|privileged"/>
+                android:protectionLevel="signature|privileged"
+                androidprv:allowViaWhitelist="true" />
 
     <!-- Allows an application to manage LiveDisplay -->
     <permission android:name="cyanogenmod.permission.MANAGE_LIVEDISPLAY"
