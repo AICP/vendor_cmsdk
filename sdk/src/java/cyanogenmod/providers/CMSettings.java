@@ -917,6 +917,17 @@ public final class CMSettings {
                 new InclusiveIntegerRangeValidator(0, 2);
 
         /**
+         * Whether to pulse the battery icon when charging
+         * @hide
+         */
+        public static final String STATUS_BAR_PULSE_CHARGING_BATTERY =
+                "status_bar_pulse_charging_battery";
+
+        /** @hide */
+        public static final Validator STATUS_BAR_PULSE_CHARGING_BATTERY_VALIDATOR =
+                sBooleanValidator;
+
+        /**
          * Whether the phone ringtone should be played in an increasing manner
          * 0 = 0ff, 1 = on
          */
@@ -2033,6 +2044,8 @@ public final class CMSettings {
             VALIDATORS.put(STATUS_BAR_BATTERY_STYLE, STATUS_BAR_BATTERY_STYLE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_SHOW_BATTERY_PERCENT,
                     STATUS_BAR_SHOW_BATTERY_PERCENT_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_PULSE_CHARGING_BATTERY,
+                    STATUS_BAR_PULSE_CHARGING_BATTERY_VALIDATOR);
             VALIDATORS.put(INCREASING_RING, INCREASING_RING_VALIDATOR);
             VALIDATORS.put(INCREASING_RING_START_VOLUME,
                     INCREASING_RING_START_VOLUME_VALIDATOR);
