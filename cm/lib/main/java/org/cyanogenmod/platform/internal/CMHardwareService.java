@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015-2016 The CyanogenMod Project
+ *               2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Range;
@@ -33,6 +35,7 @@ import cyanogenmod.hardware.DisplayMode;
 import cyanogenmod.hardware.IThermalListenerCallback;
 import cyanogenmod.hardware.ThermalListenerCallback;
 import cyanogenmod.hardware.HSIC;
+import cyanogenmod.hardware.TouchscreenGesture;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,9 +56,9 @@ import org.cyanogenmod.hardware.PersistentStorage;
 import org.cyanogenmod.hardware.PictureAdjustment;
 import org.cyanogenmod.hardware.SerialNumber;
 import org.cyanogenmod.hardware.SunlightEnhancement;
-import org.cyanogenmod.hardware.TapToWake;
 import org.cyanogenmod.hardware.ThermalMonitor;
 import org.cyanogenmod.hardware.ThermalUpdateCallback;
+import org.cyanogenmod.hardware.TouchscreenGestures;
 import org.cyanogenmod.hardware.TouchscreenHovering;
 import org.cyanogenmod.hardware.UniqueDeviceId;
 import org.cyanogenmod.hardware.VibratorHW;
@@ -117,6 +120,9 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
         public HSIC getDefaultPictureAdjustment();
         public boolean setPictureAdjustment(HSIC hsic);
         public List<Range<Float>> getPictureAdjustmentRanges();
+
+        public TouchscreenGesture[] getTouchscreenGestures();
+        public boolean setTouchscreenGestureEnabled(TouchscreenGesture gesture, boolean state);
     }
 
     private class LegacyCMHardware implements CMHardwareInterface {
@@ -142,8 +148,6 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
                 mSupportedFeatures |= CMHardwareManager.FEATURE_SERIAL_NUMBER;
             if (SunlightEnhancement.isSupported())
                 mSupportedFeatures |= CMHardwareManager.FEATURE_SUNLIGHT_ENHANCEMENT;
-            if (TapToWake.isSupported())
-                mSupportedFeatures |= CMHardwareManager.FEATURE_TAP_TO_WAKE;
             if (VibratorHW.isSupported())
                 mSupportedFeatures |= CMHardwareManager.FEATURE_VIBRATOR;
             if (TouchscreenHovering.isSupported())
@@ -162,6 +166,8 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
                 mSupportedFeatures |= CMHardwareManager.FEATURE_COLOR_BALANCE;
             if (PictureAdjustment.isSupported())
                 mSupportedFeatures |= CMHardwareManager.FEATURE_PICTURE_ADJUSTMENT;
+            if (TouchscreenGestures.isSupported())
+                mSupportedFeatures |= CMHardwareManager.FEATURE_TOUCHSCREEN_GESTURES;
         }
 
         public int getSupportedFeatures() {
@@ -180,8 +186,6 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
                     return KeyDisabler.isActive();
                 case CMHardwareManager.FEATURE_SUNLIGHT_ENHANCEMENT:
                     return SunlightEnhancement.isEnabled();
-                case CMHardwareManager.FEATURE_TAP_TO_WAKE:
-                    return TapToWake.isEnabled();
                 case CMHardwareManager.FEATURE_TOUCH_HOVERING:
                     return TouchscreenHovering.isEnabled();
                 case CMHardwareManager.FEATURE_AUTO_CONTRAST:
@@ -206,8 +210,6 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
                     return KeyDisabler.setActive(enable);
                 case CMHardwareManager.FEATURE_SUNLIGHT_ENHANCEMENT:
                     return SunlightEnhancement.setEnabled(enable);
-                case CMHardwareManager.FEATURE_TAP_TO_WAKE:
-                    return TapToWake.setEnabled(enable);
                 case CMHardwareManager.FEATURE_TOUCH_HOVERING:
                     return TouchscreenHovering.setEnabled(enable);
                 case CMHardwareManager.FEATURE_AUTO_CONTRAST:
@@ -390,6 +392,14 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
                     PictureAdjustment.getContrastRange(),
                     PictureAdjustment.getSaturationThresholdRange());
         }
+
+        public TouchscreenGesture[] getTouchscreenGestures() {
+            return TouchscreenGestures.getAvailableGestures();
+        }
+
+        public boolean setTouchscreenGestureEnabled(TouchscreenGesture gesture, boolean state) {
+            return TouchscreenGestures.setGestureEnabled(gesture, state);
+        }
     }
 
     private CMHardwareInterface getImpl(Context context) {
@@ -426,7 +436,7 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
         if (phase == PHASE_BOOT_COMPLETED) {
             Intent intent = new Intent(cyanogenmod.content.Intent.ACTION_INITIALIZE_CM_HARDWARE);
             intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-            mContext.sendBroadcast(intent,
+            mContext.sendBroadcastAsUser(intent, UserHandle.ALL,
                     cyanogenmod.platform.Manifest.permission.HARDWARE_ABSTRACTION_ACCESS);
         }
     }
@@ -865,6 +875,28 @@ public class CMHardwareService extends CMSystemService implements ThermalUpdateC
                         r.get(4).getUpper(), r.get(4).getUpper() };
             }
             return new float[10];
+        }
+
+        @Override
+        public TouchscreenGesture[] getTouchscreenGestures() {
+            mContext.enforceCallingOrSelfPermission(
+                    cyanogenmod.platform.Manifest.permission.HARDWARE_ABSTRACTION_ACCESS, null);
+            if (!isSupported(CMHardwareManager.FEATURE_TOUCHSCREEN_GESTURES)) {
+                Log.e(TAG, "Touchscreen gestures are not supported");
+                return null;
+            }
+            return mCmHwImpl.getTouchscreenGestures();
+        }
+
+        @Override
+        public boolean setTouchscreenGestureEnabled(TouchscreenGesture gesture, boolean state) {
+            mContext.enforceCallingOrSelfPermission(
+                    cyanogenmod.platform.Manifest.permission.HARDWARE_ABSTRACTION_ACCESS, null);
+            if (!isSupported(CMHardwareManager.FEATURE_TOUCHSCREEN_GESTURES)) {
+                Log.e(TAG, "Touchscreen gestures are not supported");
+                return false;
+            }
+            return mCmHwImpl.setTouchscreenGestureEnabled(gesture, state);
         }
     };
 }
